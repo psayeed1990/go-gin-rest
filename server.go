@@ -18,10 +18,10 @@ func main() {
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/users", getAllUsers ) //get all users
-		v1.GET("/users/:name", getUser) //get user by name
+		v1.GET("/users/:id", getUser) //get user by name
 		v1.POST("/users", createUser) //create user
-		v1.PUT("/users/:name", updateUser) //update user
-		v1.DELETE("/users/:name", deleteUser)	//delete user
+		v1.PUT("/users/:id", updateUser) //update user
+		v1.DELETE("/users/:id", deleteUser)	//delete user
 	} 
 
 	// PORT environment variable was defined.

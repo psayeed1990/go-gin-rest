@@ -2,6 +2,8 @@ package main
 
 //import gin
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,8 +20,20 @@ func getAllUsers(c *gin.Context) {
 
 //getUser
 func getUser(c *gin.Context) {
+	var user User
+
+	//find user by id
+	if err := DB.First(&user, c.Param("id")).Error; err != nil {
+
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+		})
+		
+		return
+	}
+
 	c.JSON(200, gin.H{
-		"message": "get user",
+		"User": user,
 	})
 }
 
