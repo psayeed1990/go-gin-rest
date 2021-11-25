@@ -97,7 +97,24 @@ func updateUser(c *gin.Context) {
 
 //deleteUser
 func deleteUser(c *gin.Context) {
+	//find user by id
+	var user User
+	id := c.Param("id")
+	if err := DB.First(&user, id).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	send_text := "User with id " + id + " has been deleted"
+
+	//delete user
+	DB.Delete(&user)
+
+
+
 	c.JSON(200, gin.H{
-		"message": "delete user",
+		"message": send_text,
 	})
 }
