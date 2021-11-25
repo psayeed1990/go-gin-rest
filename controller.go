@@ -18,17 +18,15 @@ func getAllUsers(c *gin.Context) {
 	})
 }
 
-//getUser
+//get single User by id
 func getUser(c *gin.Context) {
 	var user User
 
 	//find user by id
 	if err := DB.First(&user, c.Param("id")).Error; err != nil {
-
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": err.Error(),
 		})
-		
 		return
 	}
 
@@ -64,10 +62,36 @@ func createUser(c *gin.Context) {
 	})
 }
 
+
 //updateUser
 func updateUser(c *gin.Context) {
+
+	//check user input
+	var input UpdateInput
+	//check error of the input by param 'id'
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	//find user by id
+	var user User
+	if err := DB.First(&user, c.Param("id")).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	//update user
+	DB.Model(&user).Updates(input)
+
+
+
 	c.JSON(200, gin.H{
-		"message": "update user",
+		"message": user,
 	})
 }
 
