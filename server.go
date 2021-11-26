@@ -10,12 +10,12 @@ import (
 //create GET, POST, PUT, DELETE REST API with gin
 func main() {
 	//load dotenv
-	err := godotenv.Load()
+	godotenv.Load()
 
 	//check error to load environment variable
-	if err != nil {
-		panic(err)
-	}	
+	// if err != nil {
+	// 	panic(err)
+	// }	
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware

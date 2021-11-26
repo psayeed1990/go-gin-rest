@@ -46,4 +46,11 @@ func ConnectPostgres() {
 	db.AutoMigrate(&User{})
 	DB = db
 	//defer db.Close()
+
+
+	//connect postgres from DATABASE URL
+	// var DATABASE_URL = os.Getenv("DATABASE_URL")
+	// db, err := gorm.Open("postgres", DATABASE_URL)
+	// if err != nil {
+
 }
