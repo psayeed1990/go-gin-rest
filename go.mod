@@ -1,4 +1,4 @@
-module go-gin-rest
+module github.com/psayeed1990/go-gin-rest
 
 go 1.17
 
