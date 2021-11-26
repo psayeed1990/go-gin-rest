@@ -9,8 +9,21 @@ import (
 
 //create GET, POST, PUT, DELETE REST API with gin
 func main() {
-	//load dotenv
-	godotenv.Load()
+
+	//check if GIN_MODE is set to 'release'
+	//if it is, then set gin mode to release
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+
+		//check if .env file exists
+		if _, err := os.Stat(".env"); err == nil {
+			//load .env file
+			godotenv.Load()
+		}
+	}
+
+
+
 
 	//check error to load environment variable
 	// if err != nil {
