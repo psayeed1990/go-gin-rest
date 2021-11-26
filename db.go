@@ -4,7 +4,10 @@ package main
 // Language: go
 // Path: db.go
 import (
+	"os"
+
 	"github.com/jinzhu/gorm"
+
 	// _ "github.com/jinzhu/gorm/dialects/sqlite"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -27,10 +30,15 @@ var DB *gorm.DB
 
 func ConnectPostgres() {
 	//get DB url from environment
-	// var DATABASE_URL = os.Getenv("DATABASE_URL")
-	// log.Println("db"+DATABASE_URL)
+	var DB_NAME = os.Getenv("POSTGRES_DB")
+	var HOST = os.Getenv("POSTGRES_HOST")
+	var DB_USER = os.Getenv("POSTGRES_USER")
+	var DB_PASSWORD = os.Getenv("POSTGRES_PASSWORD")
+	
+	dsn := "host=" + HOST + " user=" + DB_USER + " dbname=" + DB_NAME + " password=" + DB_PASSWORD + " sslmode=disable"
+
 	//connect postgres
-	db, err := gorm.Open("postgres", "host=localhost user=sayeed password=1990 dbname=diesel_demo sslmode=disable")
+	db, err := gorm.Open("postgres", dsn)
 	if err != nil {
 		panic("failed to connect database")
 	}
