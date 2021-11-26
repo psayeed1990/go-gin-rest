@@ -12,7 +12,7 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
-	ConnectDB()
+	ConnectPostgres()
 
 	// Create a group of routes
 	v1 := router.Group("/v1")
