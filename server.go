@@ -23,8 +23,6 @@ func main() {
 	}
 
 
-
-
 	//check error to load environment variable
 	// if err != nil {
 	// 	panic(err)
