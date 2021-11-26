@@ -15,18 +15,19 @@ func main() {
 	if os.Getenv("GIN_MODE") == "release" {
 		gin.SetMode(gin.ReleaseMode)
 
+	}else{
 		//check if .env file exists
 		if _, err := os.Stat(".env"); err == nil {
-			//load .env file
-			godotenv.Load()
+			//load environment variables file with error checking
+			if errs := godotenv.Load(); errs != nil {
+				panic(errs)
+			}
+		
 		}
 	}
 
 
-	//check error to load environment variable
-	// if err != nil {
-	// 	panic(err)
-	// }	
+	
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
