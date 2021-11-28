@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -33,7 +34,11 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	//conect postgresql
 	ConnectPostgres()
+
+	//set cors
+	router.Use(cors.Default())
 
 	// Create a group of routes
 	v1 := router.Group("/v1")
